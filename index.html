@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/datepicker-master/dist/datepicker.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+
+
+</head>
+
+<body>
+
+    <h1>Hasznos hőösszeg számítása választott vegetációs időszakra és helyszínre</h1>
+
+    <p>
+        A különböző növények számára (és sok kártevő számára is) az 
+        egyes fenológiai fázisok eléréséhez, így a teljes éréshez is 
+        meghatározott mennyiségű hőösszegre van szükség. Az egyes 
+        növényfajták csak bizonyos hőmérséklet fölött fejlődnek, a 
+        különböző növényeknél ez eltérő úgynevezett bázishőmérsékletet 
+        jelent. Kukoricánál ez a hőmérséklet 10 Celsius fok. Egyes növényeknél 
+        létezik egy fölső küszöbérték is, mely hőmérséklet fölött már 
+        nem optimális, hanem stresszes állapotba kerül a növény.
+        A hőösszeg számítást az oldalon két különböző módszerrel lehet elvégezni:
+        a legegyszerűbb esetben a napi minimum- és maximumhőmérséklet
+        átlagát csökkentjük a bázishőmérséklettel, és ezt összegezzük 
+        az időszak során. A másik lehetőség a kukoricára általánosan 
+        használt módszeren alapul, mely az előző módszert két 
+        korrekcióval egészíti ki: a napi minimumhőmérsékletet 
+        a bázishőmérsékletre emeljük, ha az annál alacsonyabb; 
+        valamint a maximumhőmérsékletet a fölső küszöbre
+        csökkentjük, ha az annál magasabb.
+    </p>
+
+    <form>
+
+        <table class="input_form_table">
+            <tr>
+                <th colspan="2">A számítási időszak kijelölése</th>
+            </tr>
+            <tr>
+                <td>
+                    <label for="start_date">A vetés időpontja:</label>
+                </td>
+                <td>
+                    <div class="tooltip">
+                        <input type="text" name="start_date" class="input_start_date" placeholder="dátum" value="">
+                        <span class="tooltiptext">
+                            A hőösszeg számítás kezdő időpontját kell itt megadni,
+                            érdemes a vetés dátumát megjelölni.
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="end_date">Az összegzés záró időpontja:</label>
+                </td>
+                <td>
+                    <div class="tooltip">
+                        <input type="text" name="end_date" class="input_end_date" placeholder="dátum" value="">
+                        <span class="tooltiptext">
+                            A hőösszeg számítás záró időpontját kell itt megadni úgy, hogy
+                            mérési adat tegnapig áll rendelkezésre és maximum egy vegetációs
+                            ciklust lehet beállítani.
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <th colspan="2">A számítási módszer kiválasztása</th>
+            </tr>
+            <tr>
+                <td>
+                    <label for="base_method">Az alap hőösszeg számító módszer:</label>
+                </td>
+                <td class="method">
+                    <div class="tooltip">
+                        <input type="radio" name="method" class="base_method">
+                        <span class="tooltiptext">
+                            A hőösszeg számítás alap módszere során a napi minimum-
+                            és napi maximumhőmérséklet átlagát a bázishőmérséklettel
+                            csökkentve naponta összegezzük az időszak során.
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="maize_method">A kukoricára használt hőösszeg számító módszer:</label>
+                </td>
+                <td class="method">
+                    <div class="tooltip">
+                        <input type="radio" name="method" class="maize_method" checked="checked">
+                        <span class="tooltiptext">
+                            A számítás a kukoricára általánosan használt módszeren alapul,
+                            azaz a napi minimum- és maximumhőmérséklet átlagát csökkentjük
+                            a bázishőmérséklettel, két korrekcióval kiegészítve: a napi
+                            minimumhőmérsékletet a bázishőmérsékletre emeljük, ha az annál
+                            alacsonyabb; valamint a maximumhőmérsékletet a fölső küszöbre
+                            csökkentjük, ha az annál magasabb.
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <th colspan="2">Az alap hőmérséklet(ek) megadása</th>
+            </tr>
+            <tr>
+                <td>
+                    <label for="base_temperature">Bázishőmérséklet (Celsius fok):</label>
+                </td>
+                <td>
+                    <input type="number" name="base_temperature" class="input_base_temperature"
+                        placeholder="bázishőmérséklet" value="10" min="0" max="20" required>
+                </td>
+            </tr>
+            <tr class="input_top_temperature_row">
+                <td>
+                    <label for="top_temperature">Fölső küszöb hőmérséklet (Celsius fok):</label><br>
+                </td>
+                <td>
+                    <input type="number" name="top_temperature" class="input_top_temperature" 
+                    placeholder="maximális hőmérséklet" value="30" min="21" max="40" required>
+                </td>
+            </tr>
+
+            <tr></tr>
+
+            <tr>
+                <th colspan="2">A terület kiválasztása</th>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="input_city_selector">Település választás:</label>
+                </td>
+                <td>
+                    <select name="input_city_selector" class="input_city_selector">
+                        <option class="option" style="display: none"></option>
+                </td>
+            </tr>
+
+            <tr></tr>
+
+            <tr>
+                <td colspan="2" class="button_cell">
+                    <button class="selection_button">Rendben</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+
+    <script src="./assets/Chartjs/package/dist/Chart.min.js"></script>
+
+    <script src="./assets/luxon/luxon.min.js"></script>
+
+    <script src="./assets/luxon/chartjs-adapter-luxon@0.2.1"></script>
+
+    <script src="./assets/datepicker-master/dist/datepicker.min.js"></script>
+
+    <script src="./js/main.js"></script>
+
+</body>
+
+</html>

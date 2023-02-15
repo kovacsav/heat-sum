@@ -1,0 +1,118 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, p {
+    margin: auto;
+    text-align: center;
+    padding: 3rem;
+}
+
+p {
+    font-size: 1.2rem;
+}
+
+table {
+    background-color: rgb(236, 236, 236);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin: auto;
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+}
+
+table:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+td {
+    padding: 1rem;
+    text-align: right;
+    /*width: 40%;*/
+}
+
+th {
+    font-size: 1.2rem;
+    padding-top: 2rem;
+    text-align: left;
+}
+
+.method{
+    margin-left: 0;
+    text-align: left;
+}
+
+.input_city_selector{
+    width: 100%;
+}
+
+/* tooltips */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -160px;
+
+    /* animation */
+    opacity: 0;
+    transition: opacity 2s;
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .disabled_class {
+      display: none;
+  }
+
+.button_cell {
+    text-align: center;
+}
+
+
+
+.chart_container {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    position: relative;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 1rem;
+}
+
+.chart_container:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.legend_container{
+    display: flex;
+    margin: auto;
+    /*color:rgb(200, 255, 200),*/
+}

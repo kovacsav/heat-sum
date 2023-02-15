@@ -1,0 +1,2 @@
+# heat-sum
+hőösszeg számítás

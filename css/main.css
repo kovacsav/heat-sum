@@ -95,7 +95,10 @@ th {
     text-align: center;
 }
 
-
+#map {
+    height: 20vh;
+    width: 20vw;
+}
 
 .chart_container {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);

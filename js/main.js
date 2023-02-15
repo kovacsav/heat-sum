@@ -18,6 +18,8 @@ let baseTemperature = 10;
 let topTemperature = 30;
 let effTemp = 0;
 
+let map = L.map("map");
+
 // a kezdő és záró időpont között maximum egy év lehet, ezt állítjuk be millisecundum-ban
 const maxDateRange = 365 * 24 * 60 * 60 * 1000;
 
@@ -515,6 +517,17 @@ const drawChart = () => {
 
 };
 
+/* Basemap */
+let url =
+  "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_nolabels/{z}/{x}/{y}.png";
+//let url =
+("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png");
+
+L.tileLayer(url, {
+  //attribution: "OSM & Carto",
+  subdomains: "abcd",
+  maxZoom: 19,
+}).addTo(map);
 
 // a gombra kattintva indul a buli
 

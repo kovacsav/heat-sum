@@ -26,13 +26,19 @@ table:hover {
 
 td {
     padding: 1rem;
-    text-align: right;
-    /*width: 40%;*/
 }
 
 th {
     font-size: 1.2rem;
     padding-top: 2rem;
+    text-align: left;
+}
+
+.td_label {
+    text-align: right;
+}
+
+input {
     text-align: left;
 }
 
@@ -96,8 +102,10 @@ th {
 }
 
 #map {
-    height: 20vh;
-    width: 20vw;
+    height: 70vh;
+    width: 70vw;
+    justify-content: center;
+    margin: 0 1rem 0 1rem;
 }
 
 .chart_container {

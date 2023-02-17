@@ -44,7 +44,7 @@
                 <th colspan="2">A számítási időszak kijelölése</th>
             </tr>
             <tr>
-                <td>
+                <td class="td_label">
                     <label for="start_date">A vetés időpontja:</label>
                 </td>
                 <td>
@@ -58,7 +58,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td class="td_label">
                     <label for="end_date">Az összegzés záró időpontja:</label>
                 </td>
                 <td>
@@ -77,7 +77,7 @@
                 <th colspan="2">A számítási módszer kiválasztása</th>
             </tr>
             <tr>
-                <td>
+                <td class="td_label">
                     <label for="base_method">Az alap hőösszeg számító módszer:</label>
                 </td>
                 <td class="method">
@@ -92,7 +92,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td class="td_label">
                     <label for="maize_method">A kukoricára használt hőösszeg számító módszer:</label>
                 </td>
                 <td class="method">
@@ -114,7 +114,7 @@
                 <th colspan="2">Az alap hőmérséklet(ek) megadása</th>
             </tr>
             <tr>
-                <td>
+                <td class="td_label">
                     <label for="base_temperature">Bázishőmérséklet (Celsius fok):</label>
                 </td>
                 <td>
@@ -123,7 +123,7 @@
                 </td>
             </tr>
             <tr class="input_top_temperature_row">
-                <td>
+                <td class="td_label">
                     <label for="top_temperature">Fölső küszöb hőmérséklet (Celsius fok):</label><br>
                 </td>
                 <td>
@@ -135,23 +135,33 @@
             <tr></tr>
 
             <tr>
-                <th colspan="2">A terület kiválasztása</th>
+                <th colspan="2">A helyszín kiválasztása</th>
+            </tr>
+            
+            <tr>
+                <td colspan="2">
+                    <label class="td_p">Kérjük a térképre való kattinttásal állítson be 
+                        magyarországii helyszínt, vagy a jelölő ikont
+                        húzza a lekérdezni kívánt pont fölé.
+                    </label>
+                </td>
             </tr>
 
-            <tr>
-                <td>
+            <!-- <tr>
+                <td class="td_label">
                     <label for="input_city_selector">Település választás:</label>
                 </td>
                 <td>
                     <select name="input_city_selector" class="input_city_selector">
                         <option class="option" style="display: none"></option>
                 </td>
-            </tr>
-
+            </tr> -->
             <tr>
-                <div id="map"></div>
+                <td colspan="2">
+                    <div id="map"></div>
+                </td>
             </tr>
-
+            
             <tr>
                 <td colspan="2" class="button_cell">
                     <button class="selection_button">Rendben</button>
@@ -159,7 +169,7 @@
             </tr>
         </table>
     </form>
-
+    
 
     <script src="./assets/Chartjs/package/dist/Chart.min.js"></script>
 
@@ -170,9 +180,9 @@
     <script src="./assets/datepicker-master/dist/datepicker.min.js"></script>
 
     <!-- CDN -->
-    <script src="./assets/d3.v4.min.js"></script>
+    <!-- <script src="./assets/d3.v4.min.js"></script> -->
     <script src="./assets/leaflet.js"></script>
-    <script src="./assets/chroma.min.js"></script>
+    <!-- <script src="./assets/chroma.min.js"></script> -->
 
     <!-- Plugin -->
     <scr   ipt src="./assets/field.js"></script>

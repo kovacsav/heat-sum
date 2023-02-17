@@ -17,8 +17,8 @@ let chartTitle = "";
 let baseTemperature = 10;
 let topTemperature = 30;
 let effTemp = 0;
-
-let map = L.map("map");
+let latitude = 0;
+let longitude = 0;
 
 // a kezdő és záró időpont között maximum egy év lehet, ezt állítjuk be millisecundum-ban
 const maxDateRange = 365 * 24 * 60 * 60 * 1000;
@@ -182,10 +182,9 @@ const validateTemperature = (base, top) => {
     };
 };
 
+/*
 // település választás
-
 // innen szúrjuk be a legördülő lista elemeit
-
 cityArray.forEach(item => {
     let optionTemplate = `<option class="option" value="${item}">${item}</option>`;
     document.querySelector('.option:last-child').insertAdjacentHTML("afterend", optionTemplate);
@@ -193,7 +192,6 @@ cityArray.forEach(item => {
 
 // a település validálása
 // annyit kell vizsgálni, hogy van-e kiválasztva elem
-
 const validateCity = () => {
     if (cityInput.value == "") {
         alert("Kérem válasszon települést!");
@@ -203,6 +201,7 @@ const validateCity = () => {
         return true;
     }
 };
+*/
 
 // a validálásokat egy függvénybe szervezzük
 
@@ -218,10 +217,11 @@ const validateInputData = () => {
             if (validateTemperature(baseTemperature, topTemperature)) {
                 //console.log("Extreme temperature is OK");
 
-                if (validateCity()) {
+                //if (validateCity()) {
                     //console.log("City is OK")
-                    return true
-                }
+                //    return true
+                //}
+                return true;
             };
         };
     };
@@ -373,8 +373,8 @@ const updateChart = () => {
 };
 
 const setChartTitle = () => {
-    chartTitle = chartTitleBase + " - " +
-        cityInput.value + " - " +
+    chartTitle = chartTitleBase + " - helyszín: " +
+        latitude + " - " + longitude + " - " +
         start.getRange().start.toLocaleDateString() + " - " +
         start.getRange().end.toLocaleDateString();
 };
@@ -517,17 +517,31 @@ const drawChart = () => {
 
 };
 
-/* Basemap */
-let url =
-  "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_nolabels/{z}/{x}/{y}.png";
-//let url =
-("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png");
+// map
 
-L.tileLayer(url, {
-  //attribution: "OSM & Carto",
+let map = L.map("map").setView([47.3, 19.5], 7);
+
+/* Basemap */
+//let url =
+//  "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_nolabels/{z}/{x}/{y}.png";
+//let url = ("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png");
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   subdomains: "abcd",
   maxZoom: 19,
 }).addTo(map);
+
+
+let mr = L.marker([47.6, 19.4], {draggable: true}).addTo(map);
+map.on('click', (e) => mr.setLatLng(e.latlng));
+
+const getLatitudeLongitude = () => {
+    latitude = (Math.round(mr.getLatLng().lat * 100) / 100).toFixed(2);
+    longitude = (Math.round(mr.getLatLng().lng * 100) / 100).toFixed(2);
+    
+    console.log("lat, lon: ", latitude, longitude);
+}
+
 
 // a gombra kattintva indul a buli
 
@@ -535,6 +549,7 @@ selectionButton.addEventListener("click", (ev) => {
 
     ev.preventDefault();        // kizárjuk az oldalfrissítést
     if (validateInputData()) {  // ha minden bemenő adat OK, akkor
+        getLatitudeLongitude();
         createTemperatureTimeSeries(start.getRange());
         getCummulatedEffectiveTemperature();
         setChartTitle();

@@ -389,7 +389,7 @@ const getCummulatedEffectiveTemperature = () => {
 const template = `
     <div class="chart_container">
 
-        <canvas class="degree_day_chart"></canvas>
+        <canvas class="degree_day_chart" style="height:80vh; width:80vw"></canvas>
         
     </div>
 `;
@@ -489,6 +489,7 @@ const drawChart = () => {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      aspectRatio: 1,
       datasets: {
         line: {
           pointRadius: 1,

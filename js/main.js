@@ -439,7 +439,7 @@ const drawChart = () => {
 
   const ctx = document.querySelector(".degree_day_chart");
   const img = new Image();
-  img.src = "../assets/img/logo_x36_teljes_szurke_kerekitett.png";
+  img.src = "../heat-sum/assets/img/logo_x36_teljes_szurke_kerekitett.png";
 
   const logoPlugin = {
     id: 'custom_canvas_background_image',

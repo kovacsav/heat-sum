@@ -2,13 +2,16 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-h1, p {
+h1 {
     margin: auto;
     text-align: center;
     padding: 3rem;
 }
 
-p {
+.p__desc{
+    margin: auto;
+    text-align: justify;
+    padding: 0 3rem 2rem 3rem;
     font-size: 1.2rem;
 }
 
@@ -17,7 +20,7 @@ table {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     margin: auto;
     margin-bottom: 3rem;
-    padding: 1.5rem;
+    padding: 1.5rem 2.5rem 1.5rem 1.5rem;
 }
 
 table:hover {
@@ -25,7 +28,7 @@ table:hover {
 }
 
 td {
-    padding: 1rem;
+    padding: 0.6rem;
 }
 
 th {
@@ -40,6 +43,10 @@ th {
 
 input {
     text-align: left;
+}
+
+.qs-datepicker-container{
+    font-size: 13px;
 }
 
 .method{
@@ -111,9 +118,8 @@ input {
 .chart_container {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     position: relative;
-    width: 95%;
-    display: flex;
-    flex-direction: column;
+    /*display: flex;
+    flex-direction: column;*/
     margin: auto;
     padding: 1rem;
 }
@@ -122,8 +128,3 @@ input {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.legend_container{
-    display: flex;
-    margin: auto;
-    /*color:rgb(200, 255, 200),*/
-}

@@ -3,6 +3,7 @@
 const firstDataSeries = "Hőösszeg";
 const secondDataSeries = "Átlagos hőösszeg";
 const chartTitleBase = "Kummulált hőösszeg a sokéves átlaggal";
+let chartSubtitle = '';
 const xAxesLabelString = "Dátum";
 const yAxesLabelString = "Foknap";
 
@@ -384,28 +385,11 @@ const getCummulatedEffectiveTemperature = () => {
 // --------------------------------------------------------
 
 // ez lesz a chart divje, amit majd innen szúrunk be
-// saját legendet adunk meg, mert a gyári nem formázható elég jól
 
 const template = `
     <div class="chart_container">
 
         <canvas class="degree_day_chart"></canvas>
-
-        <div class="legend_container">
-            <div class="first_data_series">
-                <svg width="60" height="20">
-                    <path d="M 10 15 h 40" stroke="rgb(255, 54, 44)" stroke-width="4" />
-                </svg>
-                <span>${firstDataSeries}</span>
-            </div>
-
-            <div class="second_data_series">
-                <svg width="60" height="20">
-                    <path d="M 10 15 h 40" stroke="rgb(100, 100, 200)" stroke-width="4" />
-                </svg>
-                <span>${secondDataSeries}</span>
-            </div>
-        </div>
         
     </div>
 `;
@@ -432,40 +416,15 @@ const updateChart = () => {
 };
 
 const setChartTitle = () => {
-  chartTitle = [
-    chartTitleBase,
-    "Helyszín: " +
-      latitude +
-      " - " +
-      longitude +
-      " - Dátum: " +
+  chartTitle = chartTitleBase;
+  chartSubtitle = "Helyszín: " + latitude + " - " +
+      longitude + "         Dátum: " +
       start.getRange().start.toLocaleDateString() +
       " - " +
-      start.getRange().end.toLocaleDateString(),
-  ];
-};
-
-const drawLogo = (ctx) => {
-  ctx = ctx.getContext("2d");
-  const img = new Image();
-  img.onload = () => {
-    ctx.drawImage(img, 0, 0);
-    console.log(img);
-    ctx.beginPath();
-    ctx.moveTo(30, 96);
-    ctx.lineTo(70, 66);
-    ctx.lineTo(103, 76);
-    ctx.lineTo(170, 15);
-    ctx.stroke();
-  };
-  img.src = "../assets/img/logo_x135_teljes_szurke_kerekitett.png";
+      start.getRange().end.toLocaleDateString();
 };
 
 //  chartjs.org
-// https://github.com/chartjs/Chart.js
-// ez a legújabb, 3.x (master) verzió, saját buildeléssel
-// dokumentáció: https://www.chartjs.org/docs/master/
-// ez már tudja a két görbe közti területet külön színezni
 
 // a time kezelésére a Luxon adaptert használjuk
 // https://moment.github.io/luxon/
@@ -480,7 +439,7 @@ const drawChart = () => {
 
   const ctx = document.querySelector(".degree_day_chart");
   const img = new Image();
-  img.src = "../assets/img/logo_x135_teljes_szurke_kerekitett.png";
+  img.src = "../assets/img/logo_x36_teljes_szurke_kerekitett.png";
 
   const logoPlugin = {
     id: 'custom_canvas_background_image',
@@ -488,8 +447,8 @@ const drawChart = () => {
       if (img.complete) {
         const ctx = chart.ctx;
         const {top, left, width, height} = chart.chartArea;
-        const x = left + width / 2 - img.width / 2;
-        const y = top + height / 2 - img.height / 2;
+        const x = left - 50;
+        const y = top + height + 60;
         ctx.drawImage(img, x, y);
       } else {
         img.onload = () => chart.draw();
@@ -526,10 +485,10 @@ const drawChart = () => {
         },
       ],
     },
-
+    plugins: [logoPlugin],
     options: {
       responsive: true,
-
+      maintainAspectRatio: false,
       datasets: {
         line: {
           pointRadius: 1,
@@ -554,22 +513,41 @@ const drawChart = () => {
           },
           padding: 20,
         },
-
-        legend: {
-          display: false,
+        subtitle: {
+          display: true,
+          color: "rgb(0, 0, 0)",
+          text: chartSubtitle,
+          font: {
+            size: 14,
+          },
+          padding: 20,
         },
-        logoPlugin,
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: {
+              color: 'black',
+              boxHeight: 0,
+              font: {
+                size: 14,
+                style: 'italic'
+            }
+          }
+      },
         tooltip: {
           enabled: true,
           mode: "nearest",
           intersect: false,
-          backgroundColor: "rgba(30, 30, 30, 0.8)",
+          backgroundColor: "rgba(230, 230, 230)",
+          bodyColor: 'black',
           bodyFont: {
-            size: 15,
+            size: 14,
           },
-          bodySpacing: 4,
+          bodySpacing: 6,
+          boxHeight: 0,
+          titleColor: 'black',
           titleFont: {
-            size: 15,
+            size: 14,
           },
           Padding: 20,
           caretPadding: 10,
@@ -618,23 +596,20 @@ const drawChart = () => {
 let map = L.map("map").setView([47.3, 19.5], 7);
 
 /* Basemap */
-//let url =
-//  "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_nolabels/{z}/{x}/{y}.png";
-//let url = ("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png");
 
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   subdomains: "abcd",
   maxZoom: 19,
 }).addTo(map);
 
-let mr = L.marker([47.6, 19.4], { draggable: true }).addTo(map);
+let mr = L.marker([47.0, 19.3], { draggable: true }).addTo(map);
 map.on("click", (e) => mr.setLatLng(e.latlng));
 
 const getLatitudeLongitude = () => {
   latitude = (Math.round(mr.getLatLng().lat * 100) / 100).toFixed(2);
   longitude = (Math.round(mr.getLatLng().lng * 100) / 100).toFixed(2);
 
-  console.log("lat, lon: ", latitude, longitude);
+  //console.log("lat, lon: ", latitude, longitude);
 };
 
 // a gombra kattintva indul a buli

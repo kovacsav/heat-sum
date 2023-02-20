@@ -43,7 +43,7 @@ const baseTemperatureInput = document.querySelector(".input_base_temperature");
 const topTemperatureRow = document.querySelector(".input_top_temperature_row");
 const topTemperatureInput = document.querySelector(".input_top_temperature");
 const cityInput = document.querySelector(".input_city_selector");
-const selectionButton = document.querySelector(".selection_button");
+const selectionButton = document.querySelector(".button");
 
 // beállítjuk a tegnapi dátumot, mert ez a legutolsó időpont, amikor elkezdődhet a hőmérséklet összegzés
 let yesterday = new Date();

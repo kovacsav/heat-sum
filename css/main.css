@@ -16,7 +16,7 @@ h1 {
 }
 
 table {
-    background-color: rgb(236, 236, 236);
+    background-color: rgb(240, 240, 240);
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     margin: auto;
     margin-bottom: 3rem;
@@ -106,6 +106,13 @@ input {
 
 .button_cell {
     text-align: center;
+}
+
+.button {
+    font-size: 1.1rem;
+    padding: 10px;
+    background-color: rgb(100, 100, 100);
+    color: white;
 }
 
 #map {
